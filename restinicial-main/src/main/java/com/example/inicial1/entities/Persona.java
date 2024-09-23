@@ -17,7 +17,7 @@ import java.io.Serializable;
 @Audited
 
 
-public class Persona implements Serializable {
+public class Persona extends Base{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

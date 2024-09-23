@@ -1,7 +1,7 @@
 package com.example.inicial1.controllers;
 
 import com.example.inicial1.entities.Persona;
-import com.example.inicial1.services.PersonaService;
+import com.example.inicial1.services.PersonaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 public class PersonaController {
     @Autowired
-    private PersonaService personaService;
+    private PersonaServiceImpl personaServiceImpl;
 
     @GetMapping("")
     public ResponseEntity<?> getAll(){
         try{
             return ResponseEntity.status(HttpStatus.OK).
-                    body(personaService.findAll());
+                    body(personaServiceImpl.findAll());
         }
         catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).
@@ -32,7 +32,7 @@ public class PersonaController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getOne(@PathVariable Long id){
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(personaService.findById(id));
+            return ResponseEntity.status(HttpStatus.OK).body(personaServiceImpl.findById(id));
         }
         catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error, por favor intente más tarde\"}");
@@ -49,7 +49,7 @@ public class PersonaController {
 
 
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(personaService.save(entity));
+            return ResponseEntity.status(HttpStatus.OK).body(personaServiceImpl.save(entity));
         }
         catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, por favor intente más tarde\"}");
@@ -64,7 +64,7 @@ public class PersonaController {
         System.out.println("Nombre :" + entity.getNombre());
         System.out.println("Apellido :" + entity.getApellido());
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(personaService.update(id,entity));
+            return ResponseEntity.status(HttpStatus.OK).body(personaServiceImpl.update(id,entity));
         }
         catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, por favor intente más tarde\"}");
@@ -74,7 +74,7 @@ public class PersonaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){
         try{
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(personaService.delete(id));
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(personaServiceImpl.delete(id));
         }
         catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, por favor intente más tarde\"}");
